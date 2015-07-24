@@ -80,7 +80,9 @@ fi
 
 # Perform the VMDK Clone
 VM_VMDK_DESCRS=$(ls "$OLDVMSTORE/$OLDVM" | grep ".vmdk" | grep -v "\-flat.vmdk")
-for VMDK in "${VM_VMDK_DESCRS}"
+# Fix for multible VMDKS
+# for VMDK in "${VM_VMDK_DESCRS}"
+for VMDK in `ls "$OLDVMSTORE/$OLDVM" | grep ".vmdk" | grep -v "\-flat.vmdk"`
 do
   echo "Cloning VMDK : $VMDK"
   NEWVMDK=$(echo ${VMDK##*/} | sed "s/$OLDVM/$NEWVM/")
